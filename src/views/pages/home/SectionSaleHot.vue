@@ -10,8 +10,9 @@
 
     <!-- slick product sale hot -->
     <VueSlickCarousel v-bind="settings" class="slick-sale-hot">
-      <div v-for="(banner, index) in slickSale" :key="index">
-        <img :src="require(`../../../assets/images/${banner.imgHref}`)" alt="">
+      <div v-for="(banner, index) in productSaleHot" :key="index">
+        <img v-if="banner.images.length === 0" src="../../../assets/images/img-product-dummy.png" alt="" >
+        <img v-else :src="banner.images[0].url" alt="">
       </div>
     </VueSlickCarousel>
   </section>
@@ -20,6 +21,8 @@
 <script>
 export default {
   name: "SectionSaleHot",
+
+  props: ['productSaleHot'],
 
   data() {
     return {
@@ -30,7 +33,7 @@ export default {
         "infinite": true,
         "speed": 500,
         "slidesToShow": 3,
-        "slidesToScroll": 1,
+        "slidesToScroll": 3,
         "autoplay": true,
         "draggable": true,
         "responsive": [

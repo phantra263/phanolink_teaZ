@@ -1,7 +1,7 @@
 <template>
   <main>
     <!-- section banner -->
-    <section-banner/>
+    <section-banner :list-banner="listBanner"/>
 
     <!-- section menu cate product -->
     <section-menu-product :data-cate="listCategory"/>
@@ -10,15 +10,14 @@
     <section-buy-medicine/>
 
     <!-- section sale hot -->
-    <section-sale-hot/>
+    <section-sale-hot :product-sale-hot="listProductSaleHot"/>
 
     <!-- section product hot -->
-    <section-product-hot/>
+    <section-product-hot :product-hot="listProductFeature"/>
 
     <!-- section medicine -->
-    <section-list-cate v-for="(cate, index) in listCategory"
+    <section-list-cate v-for="(cate, index) in listCate"
                        :data-cate="cate"
-                       :id="cate.id"
                        :key="index" />
 
     <!--  &lt;!&ndash; section functional foods &ndash;&gt;-->
@@ -50,6 +49,8 @@ import SectionProductHot from "./SectionProductHot";
 import SectionNews from "./SectionNews";
 import SectionTrademark from "./SectionTrademark";
 import SectionListCate from "./SectionListCate";
+import store from '@/store'
+import {mapState, mapGetters} from "vuex";
 
 export default {
   name: "index",
@@ -59,6 +60,29 @@ export default {
     SectionTrademark,
     SectionNews,
     SectionProductHot, SectionSaleHot, SectionBuyMedicine, SectionMenuProduct, SectionBanner},
+
+  beforeRouteEnter(to, from, next) {
+    store.dispatch('homepage/getListBanners').then(() => {
+      store.dispatch('homepage/getListCategories').then(() => {
+        const params = {
+          feature: '',
+          perPage: 8
+        }
+        store.dispatch('homepage/getListProductFeature', params).then(() => {
+          const params = {
+            feature: '',
+            perPage: 9
+          }
+          store.dispatch('homepage/getListProductSaleHot', params).then(() => next())
+        })
+      })
+    })
+  },
+
+  computed: {
+    ...mapState('homepage', ['listBanner', 'listCate', 'listProductFeature', 'listProductSaleHot']),
+    ...mapGetters('homepage', ['loading'])
+  },
 
   data() {
     return {
@@ -78,7 +102,7 @@ export default {
           {
             id: 3,
             imgIcon: require('../../../assets/images/icon-cate-3.png'),
-            name: 'Hàng tiêu dùng',
+            name: 'Dụng cụ y khoa',
             imgBg: require('../../../assets/images/consumer-goods.png')
           },
           {
@@ -90,7 +114,7 @@ export default {
           {
             id: 5,
             imgIcon: require('../../../assets/images/icon-cate-5.png'),
-            name: 'Dụng cụ y tế',
+            name: 'Mẹ và bé',
             imgBg: require('../../../assets/images/medical-instruments.png')
           }]
     }

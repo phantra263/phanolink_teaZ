@@ -1,10 +1,20 @@
 <template>
   <section>
     <div class="container">
+<!--      <el-skeleton style="width: 100%; max-width: 902px" :loading="loading" animated>-->
+<!--      &lt;!&ndash; loading skeleton &ndash;&gt;-->
+<!--      <template slot="template">-->
+<!--        <el-skeleton-item-->
+<!--          variant="image"-->
+<!--          style="width: 100%; height: 240px;"-->
+<!--        />-->
+<!--      </template>-->
+
+      <template>
       <el-carousel trigger="click">
-        <el-carousel-item v-for="(bannerItem, index) in bannerImgs"
+        <el-carousel-item v-for="(bannerItem, index) in listBanner"
                           :key="index" >
-          <img :src="bannerItem.imgHref" alt="banner">
+          <img :src="bannerItem.image.url" alt="banner">
 
           <!-- btn join now -->
           <div class="btn-wrap">
@@ -15,7 +25,8 @@
           </div>
         </el-carousel-item>
       </el-carousel>
-
+      </template>
+<!--      </el-skeleton>-->
       <!-- content icon -->
       <div class="banner-icon">
         <div class="icon-item">
@@ -43,8 +54,16 @@
 </template>
 
 <script>
+
 export default {
   name: "SectionBanner",
+
+  props:{
+    listBanner: {
+      type: [],
+      default: null
+    }
+  },
 
   data() {
     return {

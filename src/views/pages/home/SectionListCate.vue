@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container" :id="dataCate.id">
     <!-- title section -->
     <div class="title-wrap">
       <div class="title-left">
@@ -18,7 +18,7 @@
                    :key="index" class="product-card">
         <!-- img product -->
         <div class="img-product">
-          <img src="../../../assets/images/product-1.png" alt="product">
+          <img :src="product.images[0].url" alt="product">
         </div>
 
         <!-- icon free ship if has-->
@@ -32,15 +32,16 @@
              class="img-gift">
 
         <!-- mark sale if has -->
-        <div class="mark-sale" v-if="product.sale">
-          <span>-{{ product.sale }}%</span>
+        <div class="mark-sale" v-if="product.discount">
+          <span><span v-if="product.discount !== 'No'">-</span>{{ product.discount }}</span>
         </div>
 
         <!-- infor product -->
         <div class="infor-product">
           <h4>{{ product.name }}</h4>
-          <span>{{ product.price }}đ</span>
-          <del v-if="product.priceSale">{{ product.priceSale }}đ</del>
+          <span v-if="product.discount === 'No'">{{ product.price }}đ</span>
+          <span v-else>{{ displayPriceDiscount(product) }}đ</span>
+          <del v-if="product.discount !== 'No'">{{ product.price }}đ</del>
         </div>
       </router-link>
     </div>
@@ -49,34 +50,42 @@
 
 <script>
 
+import {mapActions} from "vuex";
+import store from '@/store'
+
 export default {
   name: "SectionListCate",
 
   props:['dataCate'],
 
+  created() {
+    this.getListProduct()
+  },
+
   data() {
     return {
-      listProductCate: [
-        {
-          id: 1,
-          name: 'Thực Phẩm Chức Năng Bổ Não Giảm Triệu Chứng...',
-        },
-        {
-          id: 2,
-          name: 'Thực Phẩm Chức Năng Bổ Não Giảm Triệu Chứng...'
-        },
-        {
-          id: 3,
-          name: 'Hàng tiêu dùng'
-        },
-        {
-          id: 4,
-          name: 'Mỹ phẩm',
-        },
-        {
-          id: 5,
-          name: 'Dụng cụ y tế'
-        }]
+      listProductCate: []
+    }
+  },
+
+  methods: {
+    ...mapActions('homepage', ['getListProductByCate']),
+
+    getListProduct() {
+      const id = this.dataCate.id
+      store.dispatch('homepage/getListProductByCate', id).then(() => {
+        this.listProductCate = this.$store.getters["homepage/listProduct"]
+
+        // limit product show is 10
+        this.listProductCate = (this.listProductCate.length > 5 ? this.listProductCate.slice(0,5) : this.listProductCate)
+      })
+    },
+
+    displayPriceDiscount(product) {
+      const percentDiscount = parseInt(product.discount.replace('%', ''))
+
+      const priceDiscount = product.price - (percentDiscount * product.price) / 100
+      return priceDiscount
     }
   }
 }
