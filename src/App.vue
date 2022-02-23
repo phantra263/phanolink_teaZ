@@ -1,13 +1,12 @@
 <template>
   <div id="app">
+    <!-- loading -->
+    <LoadingMode v-if="$store.state.loading"/>
     <!-- Header -->
     <Header/>
 
-    <!-- loading -->
-    <LoadingMode v-if="$store.state.loading"/>
-
     <!-- Content app -->
-    <router-view />
+    <router-view  />
 
     <!-- Footer -->
     <Footer/>

@@ -16,7 +16,7 @@ export default {
 
 <style lang="scss" scoped>
 .wrap-loading {
-  height: calc(100vh - 45px);
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,8 +30,8 @@ export default {
     width: 16em;
     height: 8em;
     position: absolute;
-    top: 30%;
     overflow: hidden;
+    top: 30%;
     &::before {
       content: '';
       position: absolute;
