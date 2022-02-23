@@ -76,7 +76,7 @@ export default {
         category: this.dataCate.id
       }
       store.dispatch('homepage/getListProductByCate', param).then(() => {
-        this.listProductCate = this.$store.getters["homepage/listProduct"]
+        this.listProductCate = this.$store.getters["homepage/listProductByCate"]
 
         // limit product show is 10
         this.listProductCate = (this.listProductCate.length > 5 ? this.listProductCate.slice(0,5) : this.listProductCate)
