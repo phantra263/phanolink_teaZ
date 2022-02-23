@@ -12,7 +12,8 @@ import {
     Progress,
     Pagination,
     Collapse,
-    Loading
+    Loading,
+    Skeleton
 } from 'element-ui';
 
 Vue.use(Icon);
@@ -25,6 +26,7 @@ Vue.use(Progress);
 Vue.use(Pagination);
 Vue.use(Collapse);
 Vue.use(Loading);
+Vue.use(Skeleton);
 
 Vue.use(ElementUI)
 

@@ -2,9 +2,9 @@
   <section>
     <div class="container">
       <el-carousel trigger="click">
-        <el-carousel-item v-for="(bannerItem, index) in bannerImgs"
+        <el-carousel-item v-for="(bannerItem, index) in listBanner"
                           :key="index" >
-          <img :src="bannerItem.imgHref" alt="banner">
+          <img :src="bannerItem.image.url" alt="banner">
 
           <!-- btn join now -->
           <div class="btn-wrap">
@@ -15,7 +15,6 @@
           </div>
         </el-carousel-item>
       </el-carousel>
-
       <!-- content icon -->
       <div class="banner-icon">
         <div class="icon-item">
@@ -43,8 +42,16 @@
 </template>
 
 <script>
+
 export default {
   name: "SectionBanner",
+
+  props:{
+    listBanner: {
+      type: [],
+      default: null
+    }
+  },
 
   data() {
     return {

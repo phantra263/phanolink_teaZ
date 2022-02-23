@@ -3,8 +3,11 @@
     <!-- Header -->
     <Header/>
 
+    <!-- loading -->
+    <LoadingMode v-if="$store.state.loading"/>
+
     <!-- Content app -->
-    <router-view/>
+    <router-view />
 
     <!-- Footer -->
     <Footer/>
@@ -13,9 +16,10 @@
 <script>
 import Footer from "./views/layouts/footer/Footer";
 import Header from "./views/layouts/header/Header";
+import LoadingMode from "./components/LoadingMode";
 
 export default {
-  components: { Header, Footer },
+  components: {LoadingMode, Header, Footer }
 }
 </script>
 
@@ -152,8 +156,15 @@ export default {
   }
 
   .slick-slide {
-    img {
+    .wrap-product-hot {
       width: 444px;
+      min-height: 300px;
+      img {
+        width: auto;
+        max-width: 320px;
+        object-fit: contain;
+        margin: auto;
+      }
     }
   }
 }
@@ -229,13 +240,14 @@ export default {
     }
 
     .img-product {
-      height: 139px;
+      width: 182px;
       text-align: center;
       margin-bottom: 20px;
       transition: .5s;
 
       img {
         width: auto;
+        max-width: 100%;
       }
     }
 

@@ -15,8 +15,10 @@
     <div class="content-product-hot" >
       <!-- slick product hot -->
       <VueSlickCarousel v-bind="settings" class="slick-product-hot" >
-        <div v-for="(banner, index) in slickProductHot" :key="index">
-          <img :src="require(`../../../assets/images/${banner.imgHref}`)" alt="">
+        <div v-for="(banner, index) in productHot" :key="index" class="wrap-product-hot">
+<!--          <img v-if="banner.images" :src="banner.images[0].url" alt="">-->
+          <img v-if="banner.images.length === 0" src="../../../assets/images/img-product-dummy.png" alt="" >
+          <img v-else :src="banner.images[0].url" alt="">
         </div>
       </VueSlickCarousel>
 
@@ -32,6 +34,8 @@
 export default {
   name: "SectionProductHot",
 
+  props:['productHot'],
+
   data() {
     return {
       settings: {
@@ -40,7 +44,7 @@ export default {
         "focusOnSelect": true,
         "infinite": true,
         "speed": 500,
-        "slidesToShow": 2,
+        "slidesToShow": 3,
         "slidesToScroll": 1,
         "autoplay": true,
         "draggable": true,
@@ -94,7 +98,6 @@ export default {
     display: flex;
     justify-content: space-between;
   }
-
 }
 
 
