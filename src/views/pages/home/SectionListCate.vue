@@ -72,8 +72,10 @@ export default {
     ...mapActions('homepage', ['getListProductByCate']),
 
     getListProduct() {
-      const id = this.dataCate.id
-      store.dispatch('homepage/getListProductByCate', id).then(() => {
+      const param = {
+        category: this.dataCate.id
+      }
+      store.dispatch('homepage/getListProductByCate', param).then(() => {
         this.listProductCate = this.$store.getters["homepage/listProduct"]
 
         // limit product show is 10

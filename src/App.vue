@@ -3,8 +3,11 @@
     <!-- Header -->
     <Header/>
 
+    <!-- loading -->
+    <LoadingMode v-if="$store.state.loading"/>
+
     <!-- Content app -->
-    <router-view/>
+    <router-view />
 
     <!-- Footer -->
     <Footer/>
@@ -13,9 +16,10 @@
 <script>
 import Footer from "./views/layouts/footer/Footer";
 import Header from "./views/layouts/header/Header";
+import LoadingMode from "./components/LoadingMode";
 
 export default {
-  components: { Header, Footer }
+  components: {LoadingMode, Header, Footer }
 }
 </script>
 

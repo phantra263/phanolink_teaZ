@@ -12,6 +12,27 @@ const debug = process.env.NODE_ENV !== 'production'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  state () {
+    return {
+      loading: false,
+      countRequest: 0
+    }
+  },
+  mutations: {
+    SET_LOADING (state, payload) {
+      if (payload) {
+        state.countRequest++
+        state.loading = true
+        document.querySelector('body').style.overflow = 'hidden'
+      } else {
+        state.countRequest--
+        if (state.countRequest === 0) {
+          state.loading = false
+          document.querySelector('body').style.overflow = 'auto'
+        }
+      }
+    }
+  },
   modules,
   strict: debug
 })

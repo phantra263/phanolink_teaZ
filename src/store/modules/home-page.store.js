@@ -11,8 +11,7 @@ const initialState = {
   listBanner: null,
   listProduct: null,
   listProductFeature: null,
-  listProductSaleHot: null,
-  loading: false
+  listProductSaleHot: null
 }
 
 export const state = { ...initialState }
@@ -21,7 +20,6 @@ const getters = {
   listBanner: state => state.listBanner,
   listProduct: state => state.listProduct,
   loading: state => state.loading,
-
 }
 
 const mutations = {
@@ -63,8 +61,8 @@ const actions = {
     })
   },
 
-  getListProductByCate ({ commit }, id) {
-    return getProductByCate(id).then(res => {
+  getListProductByCate ({ commit }, param={}) {
+    return getProductByCate(param).then(res => {
       commit('SET_LIST_PRODUCT', res.data)
     }).catch((err) => {
       return err.response

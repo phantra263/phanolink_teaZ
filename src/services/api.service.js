@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '@/store'
 
 const axiosInstance = axios.create({
   baseURL: process.env.VUE_APP_API_ENDPOINT,
@@ -13,12 +14,14 @@ const axiosInstance = axios.create({
 // Add a request interceptor for authorization
 axiosInstance.interceptors.request.use(
   (config) => {
+    store.commit('SET_LOADING', true)
     return config
   },
 )
 
 axiosInstance.interceptors.response.use(
   resp => {
+    store.commit('SET_LOADING', false)
     return resp
   },
   error => {

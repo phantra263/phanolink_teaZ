@@ -1,16 +1,6 @@
 <template>
   <section>
     <div class="container">
-<!--      <el-skeleton style="width: 100%; max-width: 902px" :loading="loading" animated>-->
-<!--      &lt;!&ndash; loading skeleton &ndash;&gt;-->
-<!--      <template slot="template">-->
-<!--        <el-skeleton-item-->
-<!--          variant="image"-->
-<!--          style="width: 100%; height: 240px;"-->
-<!--        />-->
-<!--      </template>-->
-
-      <template>
       <el-carousel trigger="click">
         <el-carousel-item v-for="(bannerItem, index) in listBanner"
                           :key="index" >
@@ -25,8 +15,6 @@
           </div>
         </el-carousel-item>
       </el-carousel>
-      </template>
-<!--      </el-skeleton>-->
       <!-- content icon -->
       <div class="banner-icon">
         <div class="icon-item">
