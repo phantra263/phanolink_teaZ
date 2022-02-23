@@ -9,7 +9,7 @@ import {
 const initialState = {
   listCate: null,
   listBanner: null,
-  listProduct: null,
+  listProductByCate: null,
   listProductFeature: null,
   listProductSaleHot: null
 }
@@ -17,8 +17,9 @@ const initialState = {
 export const state = { ...initialState }
 
 const getters = {
+  listCate: state => state.listCate,
   listBanner: state => state.listBanner,
-  listProduct: state => state.listProduct,
+  listProductByCate: state => state.listProductByCate,
   loading: state => state.loading,
 }
 
@@ -31,8 +32,8 @@ const mutations = {
     state.listBanner = payload
   },
 
-  SET_LIST_PRODUCT (state, payload) {
-    state.listProduct = payload
+  SET_LIST_PRODUCT_BY_CATE (state, payload) {
+    state.listProductByCate = payload
   },
 
   SET_LIST_PRODUCT_FEATURE (state, payload) {
@@ -63,7 +64,7 @@ const actions = {
 
   getListProductByCate ({ commit }, param={}) {
     return getProductByCate(param).then(res => {
-      commit('SET_LIST_PRODUCT', res.data)
+      commit('SET_LIST_PRODUCT_BY_CATE', res.data)
     }).catch((err) => {
       return err.response
     })
