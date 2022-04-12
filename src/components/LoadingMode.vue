@@ -22,7 +22,9 @@ export default {
   justify-content: center;
   background: linear-gradient(to right, silver, teal);
   margin: auto;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  bottom: 0;
   width: 100%;
   z-index: 10;
   opacity: .9;

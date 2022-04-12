@@ -30,7 +30,7 @@ export default {
     store.dispatch('homepage/getListCategories').then(() => {
       store.dispatch('homepage/getListBanners').then(() => {
         const param = {
-          category: 1
+          category: to.params.id
         }
         store.dispatch('homepage/getListProductByCate', param).then(() => next())
       })

@@ -10,7 +10,7 @@
           <ul  class="list__cate">
             <li v-for="(categoryList,index) in listCate"
                               :key="index" class="cate__item"
-                              :class="{active : (isActive === categoryList.name)}"
+                              :class="{'active' : (isActive === categoryList.name)}"
                               @click="changeParam(categoryList.id, categoryList.name)">
 
                 <font-awesome-icon icon="chevron-right"/>{{ categoryList.name }}
@@ -48,7 +48,7 @@ export default {
 
   data() {
     return {
-      isActive: null,
+      isActive: this.$route.params.name,
 
       openCollapse: null
     }
@@ -56,11 +56,10 @@ export default {
 
   methods: {
     changeParam(id, cate) {
-      let param = this.$route.params.name;
-
-      if (param === cate) {
-         return ;
-      }else {
+      if(cate === this.$route.params) {
+        return
+      } else {
+        this.active = cate
         this.$router.push( {name: 'Product cate',  params: {id: id, name: cate}})
       }
     }

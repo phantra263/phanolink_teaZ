@@ -50,7 +50,7 @@ import SectionNews from "./SectionNews";
 import SectionTrademark from "./SectionTrademark";
 import SectionListCate from "./SectionListCate";
 import store from '@/store'
-import {mapState, mapGetters} from "vuex";
+import {mapState} from "vuex";
 
 export default {
   name: "index",
@@ -80,8 +80,7 @@ export default {
   },
 
   computed: {
-    ...mapState('homepage', ['listBanner', 'listCate', 'listProductFeature', 'listProductSaleHot']),
-    ...mapGetters('homepage', ['loading'])
+    ...mapState('homepage', ['listBanner', 'listCate', 'listProductFeature', 'listProductSaleHot'])
   },
 
   data() {

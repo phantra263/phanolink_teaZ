@@ -29,6 +29,7 @@ export default new Vuex.Store({
         if (state.countRequest === 0) {
           state.loading = false
           document.querySelector('body').style.overflow = 'auto'
+          window.scrollTo(0,0);
         }
       }
     }

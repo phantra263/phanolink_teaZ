@@ -8,7 +8,7 @@
       </div>
 
       <!-- btn see more -->
-      <router-link to="" class="btn-see-more">Xem tất cả ></router-link>
+      <router-link :to="{name: 'Product cate', params : {id: dataCate.id, name: dataCate.name}}" class="btn-see-more">Xem tất cả ></router-link>
     </div>
 
     <div class="content-wrap">
